@@ -1,0 +1,10 @@
+# virtual env
+.venv
+
+# Python
+*.pyc
+__pycache__
+
+#Quarto
+/.quarto/
+_output
