@@ -1,8 +1,28 @@
+import json
+import requests
+
 from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_weaviate import WeaviateVectorStore
 import weaviate
+
+
+def query_raw_model(query):
+    r = requests.post(
+        'http://localhost:11434/api/chat',
+        data=json.dumps({
+            'model': 'llama3.2',
+            "messages": [{
+                "role": "user",
+                "content": query,
+            }],
+            "stream": False
+        })
+    )
+    r.raise_for_status()
+
+    return r.json()['message']['content']
 
 
 class LocalRAGAgent:
