@@ -30,18 +30,6 @@ services:
     volumes:
       - ollama_data:/root/.ollama
 
-  jupyter:
-    build:
-      context: .
-      dockerfile: Dockerfile.jupyter
-    ports:
-      - "8888:8888"
-    volumes:
-      - notebooks:/home/jupyter/
-    depends_on:
-      - weaviate
-      - ollama
-
 volumes:
   weaviate_data:
   ollama_data:
