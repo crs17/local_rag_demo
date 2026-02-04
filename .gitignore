@@ -8,3 +8,5 @@ __pycache__
 #Quarto
 /.quarto/
 _output
+
+**/*.quarto_ipynb
