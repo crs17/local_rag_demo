@@ -30,16 +30,6 @@ services:
     volumes:
       - ollama_data:/root/.ollama
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    depends_on:
-      - weaviate
-      - ollama
-
 volumes:
   weaviate_data:
   ollama_data:
