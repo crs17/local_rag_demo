@@ -68,6 +68,10 @@ class LocalRAGAgent:
         for event in self.agent.stream(messages, stream_mode="values"):
             yield event
 
+    def invoke(self, query):
+        messages = {"messages": [{"role": "user", "content": query}]}
+        return self.agent.invoke(messages)["messages"][-1].content
+
     def __del__(self):
         self.weaviate_client.close()
 
