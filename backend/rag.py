@@ -30,6 +30,7 @@ def query_raw_model(query):
 prompt = (
     "You have access to a tool that retrieves context about the Napoleonic wars. "
     "Use the tool to help answer user queries."
+    "Do not make up information. If you don't know the answer, say so."
 )
 
 embeddings = OllamaEmbeddings(
