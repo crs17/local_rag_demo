@@ -14,3 +14,20 @@ fetch_models:
 
 populate_db:
 	uv run scripts/populate_db.py
+
+run_langgraph:
+	uv run langgraph dev
+
+# UI setup and run targets
+ui-setup:
+	./scripts/deploy_ui.sh
+
+ui-run:
+	@if [ ! -d "chat-ui" ]; then \
+		echo "chat-ui not found. Run 'make setup-ui' first."; \
+		exit 1; \
+	fi
+	cd chat-ui && pnpm dev
+
+ui-clean:
+	rm -rf chat-ui

@@ -12,3 +12,7 @@ _output
 
 # LangGraph
 /.langgraph_api/
+
+# Node.js UI
+chat-ui/
+node_modules/
