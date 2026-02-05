@@ -9,3 +9,4 @@ format:
     toc: true
     toc-depth: 2
     code-fold: true
+    embed-resources: true

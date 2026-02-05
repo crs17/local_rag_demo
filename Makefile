@@ -42,4 +42,5 @@ quarto-preview:
 	quarto preview local_rag_demo.ipynb --no-browser --port 5080
 
 quarto-render:
-	quarto render
+	quarto render local_rag_demo.ipynb
+	touch docs/.nojekyll
