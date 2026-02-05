@@ -20,7 +20,7 @@ populate_db:
 	uv run scripts/populate_db.py
 
 # LangGraph
-run_langgraph:
+langgraph-run:
 	uv run langgraph dev
 
 # UI setup and deployment
