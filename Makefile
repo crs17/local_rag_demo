@@ -1,3 +1,4 @@
+# Deployment
 setup:
 	uv sync
 
@@ -18,10 +19,11 @@ fetch_models:
 populate_db:
 	uv run scripts/populate_db.py
 
+# LangGraph
 run_langgraph:
 	uv run langgraph dev
 
-# UI setup and run targets
+# UI setup and deployment
 ui-setup:
 	./scripts/deploy_ui.sh
 
@@ -34,3 +36,10 @@ ui-run:
 
 ui-clean:
 	rm -rf chat-ui
+
+# Quarto
+quarto-preview:
+	quarto preview local_rag_demo.ipynb --no-browser --port 5080
+
+quarto-render:
+	quarto render
