@@ -2397,26 +2397,20 @@ Embedding vector: [-0.00635263929143548, 0.03718530014157295, -0.150256738066673
 <section id="rag" class="level2">
 <h2 class="anchored" data-anchor-id="rag">RAG</h2>
 <p>With the vector database set up, we are now ready to build our RAG Agent. The code for the RAG can be found under <a href="https://github.com/crs17/local_rag_demo/blob/main/backend/rag.py"><code>backend/rag</code></a>. Let’s import it and give it a spin!</p>
-<div id="389a9ece" class="cell" data-execution_count="2">
+<p>First let’s verify that the vector store is able to find relevant chunks:</p>
+<div id="147fd13f" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> backend <span class="im">import</span> rag</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>my_RAGAgent <span class="op">=</span> rag.LocalRAGAgent()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<p>First let’s verify that the vector store is able to find relevant chunks:</p>
-<div id="147fd13f" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>docs <span class="op">=</span> my_RAGAgent.vector_store.similarity_search_with_score(<span class="st">&quot;Under the Napoleonic wars, which countries took part in the fifth coalition against France?&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;Found </span><span class="sc">{</span><span class="bu">len</span>(docs)<span class="sc">}</span><span class="ss"> chunks:&#39;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> doc, score <span class="kw">in</span> docs:</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;Section title: </span><span class="sc">{</span>doc<span class="sc">.</span>metadata[<span class="st">&quot;title&quot;</span>]<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>doc<span class="sc">.</span>page_content[:<span class="dv">100</span>]<span class="sc">}</span><span class="ss"> ...&#39;</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;Score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;-&#39;</span> <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>docs <span class="op">=</span> rag.vector_store.similarity_search_with_score(<span class="st">&quot;Under the Napoleonic wars, which countries took part in the fifth coalition against France?&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&#39;Found </span><span class="sc">{</span><span class="bu">len</span>(docs)<span class="sc">}</span><span class="ss"> chunks:&#39;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> doc, score <span class="kw">in</span> docs:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;Section title: </span><span class="sc">{</span>doc<span class="sc">.</span>metadata[<span class="st">&quot;title&quot;</span>]<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{</span>doc<span class="sc">.</span>page_content[:<span class="dv">100</span>]<span class="sc">}</span><span class="ss"> ...&#39;</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&#39;Score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;-&#39;</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Found 4 chunks:
@@ -2441,14 +2435,15 @@ Score: 0.7061325311660767
 </div>
 <p>This looks good! We can see that the first chunk - which has the highest score - reveals the answer we are looking for.</p>
 <p>Let’s now ask the Agent the same question to see if it does better than the raw model did above:</p>
-<div id="1490da24" class="cell" data-execution_count="4">
+<div id="1490da24" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">&quot;Under the Napoleonic wars, which countries took part in the fifth coalition against France?&quot;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> event <span class="kw">in</span> my_RAGAgent.stream(query):</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    event[<span class="st">&quot;messages&quot;</span>][<span class="op">-</span><span class="dv">1</span>].pretty_print()</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">&quot;Under the Napoleonic wars, which countries took part in the fifth coalition against France?&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> {<span class="st">&quot;messages&quot;</span>: [{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: query}]}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> event <span class="kw">in</span> rag.agent.stream(message, stream_mode<span class="op">=</span><span class="st">&quot;values&quot;</span>):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    event[<span class="st">&#39;messages&#39;</span>][<span class="op">-</span><span class="dv">1</span>].pretty_print()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
