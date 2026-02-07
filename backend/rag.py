@@ -29,8 +29,11 @@ def query_raw_model(query):
 
 prompt = (
     "You have access to a tool that retrieves context about the Napoleonic wars. "
-    "Use the tool to help answer user queries."
-    "Do not make up information. If you don't know the answer, say so."
+    "Use the tool to help answer user queries. "
+    "Base your answer ONLY on the content returned by the tool. "
+    "Do not add any facts, names, or details that are not explicitly stated in the retrieved context—even if you think you know them. "
+    "If the retrieved context says only X and Y, then your answer must mention only X and Y. "
+    "Do not make up information. If the context does not contain the answer, say so."
 )
 
 embeddings = OllamaEmbeddings(
@@ -48,6 +51,7 @@ vector_store = WeaviateVectorStore(
 llm = ChatOllama(
     model="llama3.2",
     temperature=0.0,
+    seed=42,
 )
 
 @tool(response_format="content_and_artifact")
